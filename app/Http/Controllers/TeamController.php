@@ -56,6 +56,19 @@ class TeamController extends Controller
             'city' => 'required|max:30',  
             'superstar' => 'required|unique:teams|max:50' 
         ]);
+
+        // Salvataggio dati se corretti
+        $newteam = new Team();
+        $newteam->name = $data['name'];
+        $newteam->city = $data['city'];
+        $newteam->superstar = $data['superstar'];
+
+        $saved = $newteam->save();
+
+        // Se tutto è andato a buon fine faccio andare il mio utente alla pagina index con la tabella aggiornata w/ nuovo elemento
+        if($saved) {
+            return redirect()->route('teams.index');
+        }
         
     }
 
