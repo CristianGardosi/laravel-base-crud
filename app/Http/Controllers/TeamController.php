@@ -13,6 +13,8 @@ class TeamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // !ARCHIVIO/TABELLA DATI + BOTTONI MODIFICA
     public function index()
     {   
         // Get data from DB
@@ -49,9 +51,13 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    // !DETAILS PAGE PER IL SINGOLO DATO
     public function show($id)
     {
-        //
+        $team = Team::find($id);
+        
+        return view('teams.show', compact('team'));
     }
 
     /**
