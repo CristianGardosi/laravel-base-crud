@@ -14,7 +14,7 @@ class TeamController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // !ARCHIVIO/TABELLA DATI + BOTTONI MODIFICA
+    // !ARCHIVIO/TABELLA DATI + BOTTONI MODIFICA (get)
     public function index()
     {   
         // Get data from DB
@@ -29,9 +29,12 @@ class TeamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //  !PAGINA CREAZIONALE (FORM) (get)
     public function create()
-    {
-        //
+    {   
+        // Ritorno la vista con form per creazione nuovo dato
+        return view('teams.create');
     }
 
     /**
@@ -52,7 +55,7 @@ class TeamController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // !DETAILS PAGE PER IL SINGOLO DATO
+    // !DETAILS PAGE PER IL SINGOLO DATO (get)
     public function show($id)
     {
         $team = Team::find($id);

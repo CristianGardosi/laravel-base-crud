@@ -19,6 +19,10 @@
                     {{-- (Route list nel terminale per controllare le rotte delle pagine con CRUD). In questo caso il link mi porta alla pagina index che corrisponde all'archivio con tutti gli elementi della tabella pronti per essere modificati, eliminati ecc. --}}
                     <a class="nav-link" href="{{ route('teams.index') }}">Teams</a>
                 </li>
+                <li class="nav-item">
+                    {{-- (Route list nel terminale per controllare le rotte delle pagine con CRUD). In questo caso il link mi porta alla pagina index che corrisponde all'archivio con tutti gli elementi della tabella pronti per essere modificati, eliminati ecc. --}}
+                    <a class="nav-link" href="{{ route('teams.create') }}">Create new team</a>
+                </li>
             </ul>
         </div>
     </nav>
