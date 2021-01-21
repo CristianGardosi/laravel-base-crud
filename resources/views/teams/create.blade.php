@@ -8,8 +8,21 @@
         INSERT A NEW NBA TEAM
     </h1>
 
+    {{-- SEZIONE VISUALIZZAZIONE EVENTUALI ERRORI ALL'INVIO DELLA FORM --}}
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>
+                        {{ $error }}
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     {{-- !FORM! --}}
-    {{-- Posta sul metodo/rotta store ciò che l'utente inserisce nella form se lo fa in maniera corretta --}}
+    {{-- Porta sul metodo/rotta store i dati che l'utente inserisce nella form se lo fa in maniera corretta --}}
     <form action="{{ route('teams.store') }}" method="POST">
 
         @csrf

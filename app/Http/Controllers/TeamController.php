@@ -43,9 +43,20 @@ class TeamController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    // !STORE DATI INVIATI DALL'UTENTE TRAMITE FORM
     public function store(Request $request)
     {
-        //
+        // Richiedi tutti i dati inviati dall'utente tramite form
+        $data = $request->all();
+
+        // Validazione dati inseriti dall'utente
+        $request->validate([
+            'name' => 'required|unique:teams|max:30',
+            'city' => 'required|max:30',  
+            'superstar' => 'required|unique:teams|max:50' 
+        ]);
+        
     }
 
     /**
