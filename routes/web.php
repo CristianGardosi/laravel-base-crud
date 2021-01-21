@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('homepage');
+// HOMEPAGE ROUTE W/ CONTROLLER
+Route::get('/', 'HomeController@index')->name('homepage');
+
+// TEAMS RESOURCES PAGE (CRUD) W/CONTROLLER
+Route::resource('teams', 'TeamController');
