@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 // Model di riferimento DB
 use App\Team;
+// Validation control for unique(edit)
+use Illuminate\Validation\Rule;
 
 class TeamController extends Controller
 {
@@ -18,7 +20,13 @@ class TeamController extends Controller
     public function index()
     {   
         // Get data from DB
-        $teams = Team::all();
+
+        // Tutti in una pagina
+        // $teams = Team::all();
+
+        // Paginazione gestita custom (20 per pagina)
+        $teams = Team::paginate(20);
+        
         // Entro nella cartellina teams all'interno delle mie views e hitto il file index.blade.php creato ad hoc per contenere l'archivio dati con struttura tabellare
         // Passo i dati con il metodo compact
         return view('teams.index', compact('teams'));
@@ -61,7 +69,7 @@ class TeamController extends Controller
         $newteam = new Team();
         $newteam->name = $data['name'];
         $newteam->city = $data['city'];
-        $newteam->superstar = $data['superstar'];
+        $newteam->superstar = $data['superstar'];  
 
         $saved = $newteam->save();
 
@@ -93,9 +101,13 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    // !EDIT DI DATO ESISTENTE
     public function edit($id)
     {
-        //
+        $team = Team::find($id);
+        
+        return view('teams.edit', compact('team'));
     }
 
     /**
@@ -105,9 +117,31 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    // !"STORE" DATI DI UPDATE INVIATI DALL'UTENTE TRAMITE FORM DI EDIT 
     public function update(Request $request, $id)
     {
-        //
+        // Data pick dalla form edit
+        $data = $request->all();
+        // Istanza specifica editata
+        $team = Team::find($id);
+
+        // Validazion (+ unique issue)
+        $request->validate([
+            'name' => [
+                'required',
+                Rule::unique('teams')->ignore($id),
+                'max:30'
+            ],
+            'city' => 'required|max:30',  
+            'superstar' => 'required|unique:teams|max:50'
+        ]);
+        // Aggiornare dati
+        $updated = $team->update($data); // FILLABLE MODEL
+        // Redirecting
+        if($updated) {
+            return redirect()->route('teams.show', $id);
+        }
     }
 
     /**
@@ -116,8 +150,18 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    // !ELIMINARE ELEMENTO
     public function destroy($id)
-    {
-        //
+    {   
+        // Id riferimento
+        $team = Team::find($id);
+        // Operazione di delete
+        $deleted = $team->delete();
+        // Redirecting con avviso a schermo di cancellazione
+        $deletedEl = $team->name;
+        if ($deleted) {
+            return redirect()->route('teams.index')->with('deleted', $deletedEl);
+        }
     }
 }

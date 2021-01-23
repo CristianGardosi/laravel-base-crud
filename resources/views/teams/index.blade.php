@@ -7,6 +7,13 @@
     <h1>
         NBA TEAMS LIST
     </h1>
+    {{-- Deleted elements danger adv --}}
+    @if (session('deleted'))
+        <div class="alert alert-danger">
+            {{ session('deleted') }}
+            è stato eliminato
+        </div>
+    @endif
     {{-- TABLE BOOTSTRAP PER INDEX/ARCHIVIO CRUD CON DATI E PULSANTI PER LE VARIE MODIFICHE --}}
     <table class="table table-striped mt-5">
         <thead>
@@ -49,19 +56,27 @@
                         </a>
                     </td>
                     <td class="text-center" width="100">
-                        <a href="#" class="btn btn-primary">
+                        <a href="{{ route('teams.edit', $team->id) }}" class="btn btn-primary">
                             Edit
                         </a>
                     </td>
                     <td class="text-center" width="100">
-                        <a href="#" class="btn btn-danger">
-                            Delete
-                        </a>
+                        {{-- Form e non <a> perchè delete usa metodo POST e non GET --}}
+                        <form action="{{ route('teams.destroy', $team->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                        </form>
+                            
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    {{-- Gestion paginazione --}}
+    <div class="pagination">
+        {{ $teams->links() }}
+    </div>
 </div>
 @endsection
 
