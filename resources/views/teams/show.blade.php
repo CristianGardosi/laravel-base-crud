@@ -28,18 +28,19 @@
         {{$team->superstar}} 
     </h4>
     <hr>
+    {{-- Time format using CARBON --}}
     <h2>
         Created at:
     </h2>
     <h4>
-        {{$team->created_at}} 
+        {{$team->created_at->isoFormat('dddd DD/MM/YYYY')}} 
     </h4>
     <hr>
     <h2>
         Updated at:
     </h2>
     <h4>
-        {{$team->updated_at}} 
+        {{$team->updated_at->diffForHumans()}} 
     </h4>
     <hr>
 

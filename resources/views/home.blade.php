@@ -2,9 +2,10 @@
 
 @section('content')
     <div class="container mb-5">
-        <h1 class=" mb-5">
+        <h1 class=" mb-3">
             NBA TEAMS DATABASE HOME
         </h1>
+        <img src="" alt="">
         <p>
             Un numero sempre crescente dei migliori giocatori internazionali continua oggi ad arrivare a giocare nella NBA come per esempio il Rookie of the Year del 2002 e l'MVP del Mondiale 2006 Pau Gasol della Spagna, la prima scelta del Draft NBA del 2002 Yao Ming della Cina, l'MVP del Mondiale 2002 di EuroBasket 2005 ed MVP della NBA nel 2007 Dirk Nowitzki della Germania, e l'MVP dei Giochi olimpici di Atene 2004 Emanuel Ginóbili dell'Argentina.
 
